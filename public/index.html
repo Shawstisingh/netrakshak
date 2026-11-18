@@ -1,0 +1,87 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>NetRakshak AI</title>
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🚗</text></svg>" />
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <main class="wrap">
+    <header>
+      <h1>🚗 NetRakshak AI</h1>
+      <p class="caption">Affordable Multimodal Driver Monitoring &amp; Preventive Alert System</p>
+      <div class="notice info">Prototype notice: This educational demo is not a certified breathalyser or a vehicle safety device. Do not use it to decide whether someone is safe to drive.</div>
+    </header>
+
+    <div class="grid">
+      <section>
+        <h2>Driver camera</h2>
+        <div class="camera">
+          <video id="video" playsinline muted hidden></video>
+          <div class="btn-row">
+            <button id="startCam" type="button">Start camera</button>
+            <button id="capture" type="button" disabled>Capture photo</button>
+            <button id="stopCam" type="button" disabled>Stop camera</button>
+          </div>
+        </div>
+        <label class="upload">Or upload an image
+          <input id="upload" type="file" accept="image/jpeg,image/png" />
+        </label>
+        <p id="status" class="small-muted" role="status"></p>
+
+        <div id="ready" class="metric-card">
+          <h3>Ready to monitor</h3>
+          <p class="small-muted">Allow camera access or upload a clear, front-facing driver image. The prototype will estimate eye closure, mouth opening and approximate head orientation. Images are analysed in your browser and are never uploaded.</p>
+        </div>
+
+        <div id="results" hidden>
+          <canvas id="canvas"></canvas>
+          <p class="small-muted center">Analysed image</p>
+          <div class="metrics">
+            <div class="metric"><span>Driver Risk Index</span><strong id="mScore"></strong></div>
+            <div class="metric"><span>Risk level</span><strong id="mLevel"></strong></div>
+            <div class="metric"><span>Alcohol input</span><strong id="mAlcohol"></strong></div>
+          </div>
+          <div id="alert" class="notice"></div>
+          <p><strong>Detection findings</strong></p>
+          <ul id="findings"></ul>
+          <p id="ratios"></p>
+          <p class="small-muted">Single-image analysis cannot establish sustained drowsiness, actual intoxication, or driving fitness. Temporal video analysis and calibrated hardware are future integration steps.</p>
+        </div>
+      </section>
+
+      <aside>
+        <h2>Sensor input</h2>
+        <label>Alcohol sensor level (simulated MQ-3 reading): <output id="alcoholOut">100</output>
+          <input id="alcohol" type="range" min="0" max="1000" step="10" value="100" />
+        </label>
+        <p class="small-muted">Replace this slider with calibrated MQ-3 hardware readings for the hardware version.</p>
+        <h2>Detection settings</h2>
+        <label>Eye-closure threshold (EAR): <output id="eyeOut">0.21</output>
+          <input id="eye" type="range" min="0.10" max="0.35" step="0.01" value="0.21" />
+        </label>
+        <label>Yawn threshold (MAR): <output id="yawnOut">0.55</output>
+          <input id="yawn" type="range" min="0.20" max="0.80" step="0.01" value="0.55" />
+        </label>
+        <p class="small-muted">Thresholds are demonstration defaults and require calibration across users and conditions.</p>
+      </aside>
+    </div>
+
+    <hr />
+    <h2>How the prototype works</h2>
+    <div class="steps">
+      <div class="metric-card">1. Camera input</div>
+      <div class="metric-card">2. Face landmarks</div>
+      <div class="metric-card">3. EAR / MAR</div>
+      <div class="metric-card">4. Head pose cue</div>
+      <div class="metric-card">5. Risk fusion</div>
+      <div class="metric-card">6. Alert</div>
+    </div>
+    <p class="small-muted">NetRakshak AI • ABES Engineering College • Mini Project 2026–27</p>
+  </main>
+  <div id="toast" class="toast" hidden>🚨 High-risk condition detected</div>
+  <script type="module" src="app.js"></script>
+</body>
+</html>

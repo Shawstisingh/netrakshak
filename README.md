@@ -39,6 +39,9 @@ This is an educational prototype, not a certified driver-monitoring or breathaly
 
 If PowerShell blocks activation, run `Set-ExecutionPolicy -Scope Process -ExecutionPolicy Bypass` in that terminal and activate again.
 
+## Web version on Netlify
+Netlify cannot run the Streamlit server, so the repository also contains a browser version of the same prototype in `public/` (`index.html`, `app.js`, `style.css`). It uses the MediaPipe Face Landmarker in the browser through WebAssembly and applies the same landmark indices, EAR/MAR formulas, head-orientation cue, thresholds and risk scoring as `app.py`. Images are processed on the device and never uploaded. `netlify.toml` publishes this folder, so every push to `main` deploys it. Camera capture needs HTTPS, which Netlify provides.
+
 ## Deploy free with Streamlit Community Cloud
 1. Create a GitHub repository named `netrakshak-ai`.
 2. Upload `app.py`, `requirements.txt`, `runtime.txt`, `.gitignore`, and this README to the repository root.

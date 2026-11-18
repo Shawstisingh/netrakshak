@@ -1,0 +1,11 @@
+# Netlify serves the in-browser version of NetRakshak AI from /public.
+# The Streamlit app (app.py) is for local use / Streamlit Community Cloud.
+[build]
+  publish = "public"
+  command = ""
+
+[[headers]]
+  for = "/*"
+  [headers.values]
+    Permissions-Policy = "camera=(self)"
+    X-Content-Type-Options = "nosniff"
